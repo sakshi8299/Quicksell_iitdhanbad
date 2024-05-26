@@ -1,7 +1,7 @@
 import React , {useReducer} from 'react'
-import Status from './Grouping/Status'
+ import Status from './Grouping/Status'
 import Priority from './Grouping/Priority'
-import Users from './Grouping/Users';
+ import Users from './Grouping/Users';
 
 
 export default function Board({filter , tickets , users}) {
