@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../Card'
+import Card from '../Card_File'
 
 export default function Status({filterr , tickets , users}) {
   let newSortedTickets;
