@@ -1,6 +1,6 @@
 import React from 'react'
 import usr_pic from '../../public/usr-1.png';
-import ProfileImage from './ProfileImage';
+import ProfileImage from './Image';
 
 export default function Card({filterr , obj , user}) {
 
