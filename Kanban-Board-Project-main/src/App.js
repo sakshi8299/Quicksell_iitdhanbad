@@ -1,53 +1,78 @@
 import React , {useReducer , useEffect, useState} from "react";
+import Header from "./compnents/Header";
+import Board from "./compnents/Board";
+import Cookies from 'js-cookies';
 import './App.css';
-import Header from "./components/HeaderFile";
-import Board from "./components/MainBoard";
+import loader from '../public/loader.gif'
 
 
 export default function App() {
+
+
     const [tickets , setTickets] = useState([]);
     const [users , setUsers] = useState([]);
     const [filter , setFilter] = useState({"grouping":"status","ordering":"title"});
     const [loading , setLoading] = useState(false);
 
-    const changeFilter = (element , val) => {
-        if(element === 'grouping'){
-            setFilter( Filterpr => {
-                return {...Filterpr,grouping : val,}
+    const changeFilter = (key , val) => {
+        if(key === 'grouping'){
+            setFilter( prvFilter => {
+                return {
+                    ...prvFilter,
+                    grouping : val,
+                }
             } )
-        }else if(element === 'ordering'){
-            setFilter( Filterpr => {
-                return {...Filterpr, ordering : val,
+        }else if(key === 'ordering'){
+            setFilter( prvFilter => {
+                return {
+                    ...prvFilter,
+                    ordering : val,
                 }
             } )
         }
     }
+
     useEffect(() => {
-        const Filter_retain = JSON.parse(localStorage.getItem('filter'));
-        if (Filter_retain) {
-            setFilter(Filter_retain);
-        }}, []);
+        const saved_filter = JSON.parse(localStorage.getItem('filter'));
+        if (saved_filter) {
+            setFilter(saved_filter);
+        }
+      }, []);
     
-    useEffect(() => {localStorage.setItem('filter' , JSON.stringify(filter));
+    useEffect(() => {
+        localStorage.setItem('filter' , JSON.stringify(filter));
     } , [filter]);
 
-    useEffect(() => {const fetchData = async () => {
+
+    useEffect(() => {
+        const fetchData = async () => {
           try {
+
+            setLoading(true);
             const _data = await fetch('https://api.quicksell.co/v1/internal/frontend-assignment');
             const obj = await _data.json();
+            setLoading(false);
+
             setTickets(obj.tickets);
             setUsers(obj.users);
+
+
           } catch (err) {
+            setLoading(false);
             console.log(err);
           }
-        };      
+        };
+        
         fetchData();
       }, []);
+
+
     return (
         <>
             <Header filter={filter} changeFilter={changeFilter}/>
             {loading ? (
-                <div>
+                <div className="loader-div">
+                    <img src={loader} alt="Loading" />
                 </div>
             ) : (
                 <Board filter={filter} tickets={tickets} users={users}/>
