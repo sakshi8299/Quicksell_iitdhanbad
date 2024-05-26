@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../Card'
+import Card from '../Card_File'
 
 export default function Priority({filterr , tickets , users}) {
 
