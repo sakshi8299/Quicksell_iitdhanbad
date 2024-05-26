@@ -1,52 +1,35 @@
 *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    color: #250b0b;
+    font-weight: 600;
+    color: #1a1a1a;
 }
 h1 , h2 , h3 , p{
     margin: 0;
 }
 ul{
+    list-style: none;
     margin: 0;
     padding: 0;
 }
+.box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.26) 0px 5px 10px;
+}
 
+.curp{
+    cursor: pointer;
+}
 .header-main{
-    background-color: #ffffff;
+    background-color: #8E3E63;
     display: flex;
-    height: 8vh;
+    height: 9vh;
+    padding: 0.5rem 1.5rem;
     align-items: center;
-    padding: 0.7rem 1.9rem;
     justify-content: flex-start;
 }
-.card-container{
-    background-color: #ffffff;
-    min-width: 150px;
-    height: 50px;
-    padding: 4.5rem 1rem;
+.header-nav{
+    max-width: 100%;
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    height: 120px;
-    border-radius: 0.4rem;
-    margin-bottom: 0.8rem;
-}
-.card-container span{
-    color: #70747a;
-    font-weight: 200;
-    font-size: 0.9rem;
-}
-.card-img{
-    width: 1.2rem;
-    height: 1.2rem;
-    float: right;
-    border-radius: 50%;
-}
-.card_set{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 .displaybx{
     display: flex;
@@ -56,12 +39,13 @@ ul{
     justify-content: space-between;
     border: rgba(204,205,207,255) solid 1px;
     border-radius: 0.4rem;
+    cursor: pointer;
     transition: filter 300ms;
 }
 .displaybx:hover{
     filter: brightness(1.2);
 }
-.drop_down{
+.drop-down{
     position: absolute;
     top: 58px;
     width: 300px;
@@ -83,32 +67,6 @@ ul{
 .drop-down-item p{
     color: #626262;
 }
-.stylep{
-    font-size: 1rem;
-    font-weight: 300;
-    border: rgba(204,205,207,255) solid 1px;
-    border-radius: 0.2rem;
-    display: inline;
-    margin-right: 4px;
-    padding: 0.2rem;
-}
-
-.profile-image{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: #2b963a;
-  border-radius: 50%;
-}
-.available{
-    color: rgb(255, 196, 0);
-    line-height: 1px;
-    font-size: 2rem;
-    position: absolute;
-    transform: translate(13px, -1px);
-}
 .drop-down-item select{
     width: 40%;
     background-color: white;
@@ -117,7 +75,7 @@ ul{
     padding: 0.1rem 0.5rem;
     
 }
-.board{
+.main-board{
     padding: 0.8rem;
     display: flex;
     /*width: 100%;*/
@@ -128,8 +86,44 @@ ul{
     margin: 0 0.5rem;
     margin-top: 0.5rem;
 }
+.card-container{
+    background-color: #ffffff;
+    min-width: 150px;
+    height: 50px;
+    padding: 4.5rem 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 120px;
+    border-radius: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+.card-container:hover{
+    background-color: #d0acbd;
+    transform: scale(1.05);
 
+}
+.card-container span{
+    /* margin-top:-70px; */
+    color: #70747a;
+    font-weight: 200;
+    font-size: 0.9rem;
+}
+.card-img{
+    /* margin-top:-70px; */
+    width: 1.2rem;
+    height: 1.2rem;
+    float: right;
+    border-radius: 50%;
+}
+.card-head{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    
+}
 .card-container h3{
+    /* margin-top:-70px; */
     font-size: 1rem;
     margin: 0.5rem 0;
 }
@@ -148,7 +142,34 @@ ul{
     align-items: center;
     justify-content: space-between;
 }
+.stylep{
+    font-size: 1rem;
+    font-weight: 300;
+    border: rgba(204,205,207,255) solid 1px;
+    border-radius: 0.2rem;
+    display: inline;
+    margin-right: 4px;
+    padding: 0.2rem;
+}
 
+/* profile image */
+.user-profile-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #2b963a;
+  border-radius: 50%;
+}
+.available{
+    /* margin-top:-70px; */
+    color: rgb(255, 196, 0);
+    line-height: 1px;
+    font-size: 2rem;
+    position: absolute;
+    transform: translate(13px, -1px);
+}
 .loader-div{
     height: 89vh;
     display: flex;
@@ -156,17 +177,16 @@ ul{
     align-items: center;
 }
 
-/* responsive*/
-@media only screen and (max-width: 850px) {
+/* responsive desgin */
+@media only screen and (max-width: 900px) {
     .main-board{
         flex-direction: column;
         flex-wrap: wrap;
     }    
     .grid-col{
-        margin: 1rem 0;
-        border-bottom: #c6c6c6 1px solid;
         width: 100%;
         padding: 0 1rem;
-       
+        margin: 1rem 0;
+        border-bottom: #c6c6c6 1px solid;
     }
 }
