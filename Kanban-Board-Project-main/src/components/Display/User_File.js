@@ -1,28 +1,28 @@
 import React from 'react'
-import Card from '../Card_File'
-import ProfileImage from '../Image'
+import Card from '../Card'
+import ProfileImage from '../ProfileImage'
 
 export default function Users({filterr , tickets , users}) {
 
-  let Ticket_Sorted;
-  let Tempo_Sorted = [...tickets];
+  let newSortedTickets;
+  let tempSortTickets = [...tickets];
 
   if(filterr.ordering === "priority"){
-      Ticket_Sorted = Tempo_Sorted.sort((u, v) => { return (v.priority - u.priority)});
+      newSortedTickets = tempSortTickets.sort((a, b) => { return (b.priority - a.priority)});
   }else if(filterr.ordering === "title"){
-      Ticket_Sorted =  Tempo_Sorted.sort((u , v) => {
-          return (u.title.localeCompare(v.title));
+      newSortedTickets =  tempSortTickets.sort((a , b) => {
+          return (a.title.localeCompare(b.title));
       });
   }
 
-  const search_user = Object.values(users);
+  const user_s = Object.values(users);
   const mapping = {};
-  search_user?.forEach((ele , i) => {
+  user_s?.forEach((ele , i) => {
     let temp = [];
 
-    for(let i in Ticket_Sorted){
-      if(Ticket_Sorted[i].userId == ele.id){
-        temp.push(Ticket_Sorted[i]);
+    for(let i in newSortedTickets){
+      if(newSortedTickets[i].userId == ele.id){
+        temp.push(newSortedTickets[i]);
       }
     }
     
@@ -31,7 +31,7 @@ export default function Users({filterr , tickets , users}) {
 
   return (
     <>
-      {search_user?.map((ele , i) => {
+      {user_s?.map((ele , i) => {
         return (
           <div key={i} className='grid-col'>
             <div className='grid-col-head'>
@@ -41,10 +41,12 @@ export default function Users({filterr , tickets , users}) {
                 <span>{mapping[ele.id]?.length}</span>
               </div>
               <div>
+                <i className='bx bx-plus bx-rotate-90 curp' ></i>
+                <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
               </div>
             </div>
-            {mapping[ele.id]?.map((ele , it)=>{
-              return (<Card key={it} filterr={filterr} obj={ele} user={users}/>);
+            {mapping[ele.id]?.map((ele , ii)=>{
+              return (<Card key={ii} filterr={filterr} obj={ele} user={users}/>);
             })}
             
           </div>
