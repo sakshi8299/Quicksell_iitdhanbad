@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function DropdownMenu({filter , changeFilter}) {
   return (
-    <div className='drop_down'>
+    <div className='drop-down'>
         <div>
             <div className='drop-down-item'>
                 <p>Grouping</p>
