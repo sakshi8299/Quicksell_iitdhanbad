@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '../Card'
-import ProfileImage from '../ProfileImage'
+import Card from '../Card_File'
+import ProfileImage from '../Image'
 
 export default function Users({filterr , tickets , users}) {
 
