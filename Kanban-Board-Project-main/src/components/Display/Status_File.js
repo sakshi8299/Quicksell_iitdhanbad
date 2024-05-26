@@ -1,52 +1,53 @@
 import React from 'react'
-import Card from '../Card_File'
+import Card from '../Card'
 
 export default function Status({filterr , tickets , users}) {
-  let Ticket_Sorted;
-  let  Tempo_Sorted= [...tickets];
+  let newSortedTickets;
+  let tempSortTickets = [...tickets];
 
   if(filterr?.ordering === "priority"){
-      Ticket_Sorted = Tempo_Sorted.sort((u, v) => { return (v.priority - u.priority)});
+      newSortedTickets = tempSortTickets.sort((a, b) => { return (b.priority - a.priority)});
   }else if(filterr?.ordering === "title"){
-      Ticket_Sorted =  Tempo_Sorted.sort((u , v) => {
-          return (u.title.localeCompare(v.title));
+      newSortedTickets =  tempSortTickets.sort((a , b) => {
+          return (a.title.localeCompare(b.title));
       });
   }
 
-  const DONE = Ticket_Sorted?.filter((obj) => {
-    return obj.status === "DONE";
-});
-const CANCELLED = Ticket_Sorted?.filter((obj) => {
-    return obj.status === "CANCELLED";
-});
-  const INPROGRESS = Ticket_Sorted?.filter((obj) => {
-    return obj.status === "In progress";
-});
-    const BACKLOG = Ticket_Sorted?.filter((obj) => {
-        return obj.status === "BACKLOG";
+    const backlog = newSortedTickets?.filter((obj) => {
+        return obj.status === "Backlog";
     })
-    const TODO = Ticket_Sorted?.filter((obj) => {
-        return obj.status === "TODO";
+    const todo = newSortedTickets?.filter((obj) => {
+        return obj.status === "Todo";
     });
-    
+    const inprogress = newSortedTickets?.filter((obj) => {
+        return obj.status === "In progress";
+    });
+    const done = newSortedTickets?.filter((obj) => {
+        return obj.status === "Done";
+    });
+    const canceled = newSortedTickets?.filter((obj) => {
+        return obj.status === "Canceled";
+    });
+
   return (
     <>
         <div className='grid-col'>
         <div className='grid-col-head'>
           <div >
             <i style={{color : '#ff5f56'}} className='bx bxs-error-circle' ></i>
-            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>BACKLOG</span>
-            <span>{BACKLOG?.length}</span>
+            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>Backlog</span>
+            <span>{backlog?.length}</span>
           </div>
           <div>
-         
+            <i className='bx bx-plus bx-rotate-90 curp' ></i>
+            <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
           </div>
         </div>
-        { BACKLOG?.length !== 0 ? 
-            BACKLOG?.map((ele , i) => {
+        { backlog?.length !== 0 ? 
+            backlog?.map((ele , i) => {
                 return (<Card key={i} filterr={filterr} obj={ele} user={users} />);
             }) :
-            (<span style={{color : '#545454' , fontSize : '0.8rem'}}>Nothing is in BACKLOG</span>)
+            (<span style={{color : '#545454' , fontSize : '0.8rem',border:"1px solid black" ,padding:"3px",borderRadius:"5px"}}>Nothing is in backlog</span>)
         }
       </div>
 
@@ -54,18 +55,19 @@ const CANCELLED = Ticket_Sorted?.filter((obj) => {
         <div className='grid-col-head'>
           <div >
             <i style={{color : '#e2e2e2'}} className='bx bx-circle'></i>
-            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>TODO</span>
-            <span>{TODO?.length}</span>
+            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>Todo</span>
+            <span>{todo?.length}</span>
           </div>
           <div>
-           
+            <i className='bx bx-plus bx-rotate-90 curp' ></i>
+            <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
           </div>
         </div>
-        { TODO?.length !== 0 ? 
-            TODO?.map((ele , i) => {
+        { todo?.length !== 0 ? 
+            todo?.map((ele , i) => {
                 return (<Card key={i} filterr={filterr} obj={ele} user={users}  />);
             }) :
-            (<span style={{color : '#545454' , fontSize : '0.8rem'}}>Nothing TODO</span>)
+            (<span style={{color : '#545454' , fontSize : '0.8rem',border:"1px solid black" ,padding:"3px",borderRadius:"5px"}}>Nothing Todo</span>)
         }
         
       </div>
@@ -75,17 +77,18 @@ const CANCELLED = Ticket_Sorted?.filter((obj) => {
           <div >
             <i style={{color : '#f1ca4b'}} className='bx bx-loader-circle'></i>
             <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>In Progress</span>
-            <span>{INPROGRESS?.length}</span>
+            <span>{inprogress?.length}</span>
           </div>
           <div>
-           
+            <i className='bx bx-plus bx-rotate-90 curp' ></i>
+            <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
           </div>
         </div>
-        { INPROGRESS?.length !== 0 ? 
-            INPROGRESS?.map((ele , i) => {
+        { inprogress?.length !== 0 ? 
+            inprogress?.map((ele , i) => {
                 return (<Card key={i} filterr={filterr} obj={ele} user={users} />);
             }) :
-            (<span style={{color : '#545454' , fontSize : '0.8rem'}}>Nothing is in progress</span>)
+            (<span style={{color : '#545454' , fontSize : '0.8rem',border:"1px solid black" ,padding:"3px",borderRadius:"5px"}}>Nothing is in progress</span>)
         }
 
       </div>
@@ -94,41 +97,42 @@ const CANCELLED = Ticket_Sorted?.filter((obj) => {
         <div className='grid-col-head'>
           <div >
             <i style={{color : '#5e6ad2'}} className='bx bxs-check-circle'></i>
-            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>DONE</span>
-            <span>{DONE?.length}</span>
+            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>Done</span>
+            <span>{done?.length}</span>
           </div>
           <div>
-      
+            <i className='bx bx-plus bx-rotate-90 curp' ></i>
+            <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
           </div>
         </div>
-        { DONE?.length !== 0 ? 
-            DONE?.map((ele , i) => {
+        { done?.length !== 0 ? 
+            done?.map((ele , i) => {
                 return (<Card key={i} filterr={filterr} obj={ele} user={users} />);
             }) :
-            (<span style={{color : '#545454' , fontSize : '0.8rem'}}>NOTHING IS DONE</span>)
+            (<span style={{color : '#545454' , fontSize : '0.8rem',border:"1px solid black" ,padding:"3px",borderRadius:"5px"}}>Nothing is Done</span>)
         }
 
-      </div>  
+      </div>
 
-       <div className='grid-col'>
+      <div className='grid-col'>
         <div className='grid-col-head'>
           <div >
-            <i style={{color : '#5e6ad2'}} className='bx bxs-error-circle'></i>
-            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>CANCELLED</span>
-            <span>{DONE?.length}</span>
+            <i style={{color : '#94a2b3'}} className='bx bxs-x-circle'></i>
+            <span style={{margin:'0 7px' , fontSize:'1.1rem'}}>Canceled</span>
+            <span>{canceled?.length}</span>
           </div>
           <div>
-      
+            <i className='bx bx-plus bx-rotate-90 curp' ></i>
+            <i className='bx bx-dots-vertical-rounded bx-rotate-90 curp' ></i>
           </div>
         </div>
-        { DONE?.length !== 0 ? 
-            DONE?.map((ele , i) => {
+        { canceled?.length !== 0 ? 
+            canceled?.map((ele , i) => {
                 return (<Card key={i} filterr={filterr} obj={ele} user={users} />);
             }) :
-            (<span style={{color : '#545454' , fontSize : '0.8rem'}}>all cancel</span>)
+            (<span style={{color : '#545454' , fontSize : '0.8rem',border:"1px solid black" ,padding:"3px",borderRadius:"5px"}}>Nothing is Canceled</span>)
         }
-
-      </div>  
+      </div>
     </>
   )
 }
